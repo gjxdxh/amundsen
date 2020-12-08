@@ -66,7 +66,10 @@ class TestRedashDashboardUtils(unittest.TestCase):
                     'data_source_id': 1,
                     'query': 'SELECT 2+2 FROM DUAL',
                     'name': 'Test'
-                }
+                },
+                'id': 12345,
+                'name': 'test_widget',
+                'type': 'CHART'
             }
         }
         widget = get_visualization_widgets([widget_data])[0]
@@ -75,6 +78,9 @@ class TestRedashDashboardUtils(unittest.TestCase):
         self.assertEqual(widget.data_source_id, 1)
         self.assertEqual(widget.raw_query, 'SELECT 2+2 FROM DUAL')
         self.assertEqual(widget.query_name, 'Test')
+        self.assertEqual(widget.visualization_id, 12345)
+        self.assertEqual(widget.visualization_name, 'test_widget')
+        self.assertEqual(widget.visualization_type, 'CHART')
 
     def test_descriptions_from_text(self) -> None:
         text_widgets = get_text_widgets([
